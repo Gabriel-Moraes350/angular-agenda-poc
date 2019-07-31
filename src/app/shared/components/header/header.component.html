@@ -1,0 +1,73 @@
+<div class="sidebar" data-color="white" data-active-color="danger">
+    <div class="logo">
+        <a href="http://www.creative-tim.com" class="simple-text logo-mini active">
+            <div class="logo-image-small">
+                <i class="nc-icon nc-diamond"></i>
+            </div>
+        </a>
+        <a routerLink="/" class="simple-text logo-normal">
+            Agenda
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class=" ">
+                <a routerLink="/contato">
+                    <i class="nc-icon nc-circle-10"></i>
+                    <p>Lista de Contatos</p>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/contato">
+                    <i class="nc-icon nc-simple-add"></i>
+                    <p>Adicionar</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+        <div class="container-fluid">
+            <div class="navbar-wrapper">
+                <div class="navbar-toggle">
+                    <button type="button" class="navbar-toggler">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                </div>
+                <a class="navbar-brand" href="#" routerLink="/">DashBoard</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <div class="dropdown nav-link" dropdown>
+                            <a class="btn btn-primary dropdown-toggle" dropdownToggle  role="button"
+                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Configurações
+                            </a>
+
+                            <div *dropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#" routerLink="/login">Login</a>
+                                <!-- <a class="dropdown-item" href="#">Logar</a> -->
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="content">
+        <div class="row">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

@@ -1,17 +1,22 @@
-<table class="table">
+<div class="text-center">
+  <table class="table">
     <thead class=" text-primary">
-        <tr>
-            <th>Id</th>
-            <th> Nome </th>
-            <th> Sobrenome </th>
-            <th> Data de Nascimento </th>
-        </tr>
+      <tr>
+        <th>#</th>
+        <th> Nome </th>
+        <th> Sobrenome </th>
+        <th> Email</th>
+        <th> Data de Nascimento </th>
+      </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let c of contatos">
-            <td>{{c.id}}</td>
-            <td>{{c.name}}</td>
-            <td>{{c.lastName}}</td>
-            <td>{{c.birthDate}}</td>
-        </tr>
-</table>
+    <tbody *ngIf="contatos.length !== 0">
+      <tr *ngFor="let c of contatos | paginate: config">
+        <td>{{c.id}}</td>
+        <td>{{c.name | uppercase}}</td>
+        <td>{{c.lastName}}</td>
+        <td>{{c.email}}</td>
+        <td>{{c.birthDate}}</td>
+      </tr>
+  </table>
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>

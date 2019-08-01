@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     SharedModule,
     AppRoutingModule,
-    ContatoModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

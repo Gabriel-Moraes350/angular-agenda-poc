@@ -11,7 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { ContatosService } from '../services/contatos.service';
-defineLocale('pt-br', ptBrLocale); 
+defineLocale('pt-br', ptBrLocale);
 
 let optionsMask: Partial<IConfig> | (() => Partial<IConfig>);
 @NgModule({

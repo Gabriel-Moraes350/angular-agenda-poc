@@ -1,3 +1,4 @@
+import { AppSettings } from './../AppSettings';
 import { Contato } from './../../../models/Contato';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -20,7 +21,8 @@ export class ContatosService {
     return this.http.post<Contato>("http://localhost:8080/contatos", contato, this.httpOptions)
   }
 
-  public getItems():  Observable<Contato[]>{
-    return this.http.get<Contato[]>("http://localhost:8080/contatos", this.httpOptions);
+  public getItems(size: number = 5,
+                  page: number = 1):  Observable<any[]>{
+    return this.http.get<any[]>(`http://localhost:8080/contatos/list?size=${size}&page=${page}`, this.httpOptions);
   }
 }

@@ -12,14 +12,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ContatoComponent implements OnInit {
 
-  formGroup: FormGroup
+  formGroup: FormGroup;
 
-  constructor(private fb: FormBuilder, 
+  constructor(private fb: FormBuilder,
               private localService: BsLocaleService,
               private contatoService: ContatosService,
               private toastr: ToastrService) {
-    this.constroiForm()
-    this.localService.use('pt-br')
+    this.constroiForm();
+    this.localService.use('pt-br');
    }
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class ContatoComponent implements OnInit {
     this.formGroup = this.fb.group({
       name: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', { validators: [Validators.required, Validators.email], updateOn: 'blur'}],
       birthDate: ['', Validators.required]
     })
   }

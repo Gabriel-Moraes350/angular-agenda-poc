@@ -1,20 +1,26 @@
+import { ContatoListComponent } from './contato-list/contato-list.component';
+import { ContatoModule } from './contato/contato.module';
 import {  AppRoutingModule } from './app.routes';
 import { SharedModule } from './shared/modules/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { ContatoComponent } from './contato/contato.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContatoComponent
+    HomeComponent,
+    ContatoListComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ContatoModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

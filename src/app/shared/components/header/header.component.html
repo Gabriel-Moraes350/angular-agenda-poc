@@ -12,7 +12,7 @@
     <div class="sidebar-wrapper">
         <ul class="nav">
             <li class=" ">
-                <a routerLink="/contato">
+                <a routerLink="/contato/lista">
                     <i class="nc-icon nc-circle-10"></i>
                     <p>Lista de Contatos</p>
                 </a>
@@ -67,7 +67,9 @@
     </nav>
     <div class="content">
         <div class="row">
-            <ng-content></ng-content>
+            <div class="col-12">
+                <ng-content></ng-content>
+            </div>   
         </div>
     </div>
 </div>

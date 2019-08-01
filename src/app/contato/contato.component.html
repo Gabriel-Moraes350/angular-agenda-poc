@@ -1,1 +1,23 @@
-<p>contato works!</p>
+<form [formGroup]="formGroup" #form="ngForm" class="row" (submit)="send($event)">
+
+    <input-text class="col-6" [label]="'Primeiro Nome'">
+        <input formControlName="name" inputRef class="form-control" type="text" />
+    </input-text>
+
+    <input-text class="col-6" [label]="'Sobrenome'">
+        <input formControlName="lastName" inputRef class="form-control" type="text" />
+    </input-text>
+
+    <input-text class="col-6" [label]="'E-mail'" [validations]="{email: 'E-mail deve ser válido'}">
+        <input formControlName="email" inputRef class="form-control" type="text" />
+    </input-text>
+
+    <input-text class="col-6" [label]="'Data de Nascimento'">
+        <input type="text" mask="00/00/0000" inputRef placeholder="10/10/1990" class="form-control"
+            formControlName="birthDate" >
+    </input-text>
+
+    <div class="col-12">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Enviar!</button>
+    </div>
+</form>

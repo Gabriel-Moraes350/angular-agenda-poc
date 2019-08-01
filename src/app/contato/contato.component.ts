@@ -1,4 +1,9 @@
+import { ContatosService } from './../shared/services/contatos.service';
+import { Contato } from './../../models/Contato';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsLocaleService } from 'ngx-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contato',
@@ -7,9 +12,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContatoComponent implements OnInit {
 
-  constructor() { }
+  formGroup: FormGroup
+
+  constructor(private fb: FormBuilder, 
+              private localService: BsLocaleService,
+              private contatoService: ContatosService,
+              private toastr: ToastrService) {
+    this.constroiForm()
+    this.localService.use('pt-br')
+   }
 
   ngOnInit() {
+  }
+
+  constroiForm(){
+    this.formGroup = this.fb.group({
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      birthDate: ['', Validators.required]
+    })
+  }
+
+  send(e: Event){
+    e.preventDefault();
+    this.contatoService.send(new Contato(this.formGroup.value))
+    .subscribe(() => this.toastr.show("Contato criado com sucesso", "Sucesso"));
   }
 
 }

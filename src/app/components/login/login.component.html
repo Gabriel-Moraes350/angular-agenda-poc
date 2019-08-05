@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Login</h5>
+                    <form class="form-signin"  #form="ngForm" [formGroup]="loginForm" (submit)="login($event)">
+                        <input-text class="col-12" [validations]="{email: 'E-mail deve ser válido'}">
+                            <input type="email" inputRef formControlName="email" class="form-control" placeholder="Email"
+                                autofocus>
+                        </input-text>
+                        <input-text class="col-12">
+                            <input type="password" inputRef formControlName="password" class="form-control" placeholder="Senha">
+                        </input-text>
+
+                        <button [disabled]="!form.valid" class="btn btn-lg btn-primary btn-block text-uppercase my-3"
+                            type="submit">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

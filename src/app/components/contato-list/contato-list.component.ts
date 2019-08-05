@@ -1,7 +1,8 @@
-import { AppSettings } from './../shared/AppSettings';
-import { ContatosService } from './../shared/services/contatos.service';
+import { AppSettings } from './../../shared/AppSettings';
+import { ContatosService } from './../../services/contatos.service';
 import { Contato } from './../../models/Contato';
 import { Component, OnInit } from '@angular/core';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-contato-list',
@@ -12,7 +13,8 @@ export class ContatoListComponent implements OnInit {
   config: any
   contatos: Contato[] = []
 
-  constructor(private cs: ContatosService) {
+  constructor(private cs: ContatosService,
+              private toast: ToastService) {
   }
 
   ngOnInit() {
@@ -40,6 +42,19 @@ export class ContatoListComponent implements OnInit {
 
     //faz a busca da nova pagina
     this.cs.getItems(AppSettings.ITEMS_PER_PAGE, Number.parseFloat(e.toString())).subscribe(res => this.responseList(res))
+  }
+
+  excluir(id: number){
+    const confirmar = window.confirm("Você deseja mesmo excluir o contato?")
+
+    if(confirmar){
+      this.cs.excluir(id).subscribe(res => {
+        const index = this.contatos.findIndex(i => i.id === id);
+        this.contatos.splice(index, 1);
+        this.toast.success("Excluido com sucesso");
+      });
+    }
+   
   }
 
 }

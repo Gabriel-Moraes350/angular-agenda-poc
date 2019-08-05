@@ -1,3 +1,4 @@
+import { LoginService } from './../../../services/login.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,4 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
+  isLogged: boolean = false
+  public constructor(private service: LoginService){
+    this.service.isLogged.subscribe(res => this.isLogged = res);
+  }
+  
+
 }

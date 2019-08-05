@@ -1,5 +1,4 @@
 <form [formGroup]="formGroup" #form="ngForm" class="row" (submit)="send($event)">
-
     <input-text class="col-6" [label]="'Primeiro Nome'">
         <input formControlName="name" inputRef class="form-control" type="text" />
     </input-text>
@@ -12,12 +11,12 @@
         <input formControlName="email" inputRef class="form-control" type="text" />
     </input-text>
 
-    <input-text class="col-6" [label]="'Data de Nascimento'">
+    <input-text class="col-6" [label]="'Data de Nascimento'" [validations]="{dateInvalid: 'Data deve ser válida'}">
         <input type="text" mask="00/00/0000" inputRef placeholder="10/10/1990" class="form-control"
-            formControlName="birthDate" >
+            formControlName="birthDate">
     </input-text>
 
     <div class="col-12">
-        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Enviar!</button>
+        <button type="submit" [disabled]="!form.valid || btnDisabled" class="btn btn-primary">Enviar!</button>
     </div>
 </form>

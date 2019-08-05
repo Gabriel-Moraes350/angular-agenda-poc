@@ -1,13 +1,20 @@
-import { ContatoListComponent } from './contato-list/contato-list.component';
-import { HomeComponent } from './home/home.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { AuthGuardService } from './guards/auth-guard.service';
+import { HomeComponent } from './components/home/home.component';
+import { ContatoListComponent } from './components/contato-list/contato-list.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from "@angular/router";
+import { LoginComponent } from './components/login/login.component';
 
 const appRoutes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
-    {path: 'contato', loadChildren: './contato/contato.module#ContatoModule'},
+    {path: 'contato', loadChildren: './components/contato/contato.module#ContatoModule', 
+    canActivate: [AuthGuardService]},
     {path: 'contato/lista', component: ContatoListComponent},
-    {path: 'home', component: HomeComponent}
+    {path: 'home', component: HomeComponent},
+    {path: 'login', component: LoginComponent},
+    {path: 'logout', component: LogoutComponent},
+    { path: '**', redirectTo: '' }
 ]
 
 @NgModule({

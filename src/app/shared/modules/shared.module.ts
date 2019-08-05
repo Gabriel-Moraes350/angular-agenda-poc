@@ -10,10 +10,41 @@ import {NgxMaskModule, IConfig} from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
-import { ContatosService } from '../services/contatos.service';
+import { ReactiveFormsModule } from '@angular/forms';
 defineLocale('pt-br', ptBrLocale);
+import { NgxUiLoaderModule, NgxUiLoaderConfig } from  'ngx-ui-loader';
+
 
 let optionsMask: Partial<IConfig> | (() => Partial<IConfig>);
+let optionsLoader : NgxUiLoaderConfig = {
+  "bgsColor": "red",
+  "bgsOpacity": 0.5,
+  "bgsPosition": "bottom-right",
+  "bgsSize": 60,
+  "bgsType": "ball-spin-clockwise",
+  "blur": 4,
+  "delay": 0,
+  "fgsColor": "red",
+  "fgsPosition": "center-center",
+  "fgsSize": 60,
+  "fgsType": "ball-spin-clockwise",
+  "gap": 24,
+  "logoPosition": "center-center",
+  "logoSize": 120,
+  "logoUrl": "",
+  "masterLoaderId": "master",
+  "overlayBorderRadius": "0",
+  "overlayColor": "rgba(40, 40, 40, 0.8)",
+  "pbColor": "red",
+  "pbDirection": "ltr",
+  "pbThickness": 3,
+  "hasProgressBar": true,
+  "text": "",
+  "textColor": "#FFFFFF",
+  "textPosition": "center-center",
+  "maxTime": -1,
+  "minTime": 250
+}
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -28,12 +59,19 @@ let optionsMask: Partial<IConfig> | (() => Partial<IConfig>);
     AlertModule.forRoot(),
     BsDropdownModule.forRoot(),
     RouterModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgxMaskModule.forRoot(optionsMask),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3500,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    }),
+    NgxUiLoaderModule.forRoot(optionsLoader)
   ],
 
   exports: [
+    ReactiveFormsModule,
     BsDropdownModule,
     ModalModule,
     BsDatepickerModule,
@@ -43,10 +81,8 @@ let optionsMask: Partial<IConfig> | (() => Partial<IConfig>);
     InputRefDirective,
     InputTextComponent,
     NgxMaskModule,
-    ToastrModule
-  ],
-  providers: [
-    ContatosService
+    ToastrModule,
+    NgxUiLoaderModule
   ]
 })
 export class SharedModule { }

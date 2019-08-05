@@ -7,6 +7,7 @@
         <th> Sobrenome </th>
         <th> Email</th>
         <th> Data de Nascimento </th>
+        <th> Ações </th>
       </tr>
     </thead>
     <tbody *ngIf="contatos.length !== 0">
@@ -16,6 +17,10 @@
         <td>{{c.lastName}}</td>
         <td>{{c.email}}</td>
         <td>{{c.birthDate}}</td>
+        <td class="d-flex justify-content-around">
+          <a href="#" [routerLink]="['/contato/editar', c.id]" ><i class="fa fa-edit fa-2x"></i></a> 
+          <a href="#" (click)="excluir(c.id);$event.preventDefault();"><i class="fa fa-trash fa-2x"></i></a>
+        </td>
       </tr>
   </table>
   <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>

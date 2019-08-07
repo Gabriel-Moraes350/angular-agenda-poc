@@ -1,19 +1,25 @@
+import { AppSettings } from './../shared/AppSettings';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Observable, Subscriber, Subject } from 'rxjs';
+import { Observable, Subscriber, Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private source = new Subject<boolean>();
-  isLogged = this.source.asObservable();
 
-  token: string = "";
-  destRoute: string = ""
+  private logged: BehaviorSubject<boolean>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    if(localStorage.getItem(AppSettings.API_KEY)){
+      this.logged = new BehaviorSubject<boolean>(true);
+    }else{
+      this.logged = new BehaviorSubject<boolean>(false);
+    }
+
+  }
 
   public login(username: string, password: string): Observable<any>{
       return this.http.post(`${environment.API_URL}auth/signin`, {
@@ -27,19 +33,15 @@ export class LoginService {
       this.next(true);
     else
       this.next(false);
-
-    this.token = response;
+    localStorage.setItem(AppSettings.API_KEY, response);
   }
  
-  next(logged: boolean){
-    this.source.next(logged);
-  }
-  
-  setRoute(route: string){
-    this.destRoute = route
+  public isLogged(): Observable<boolean>{
+    return this.logged.asObservable();
   }
 
-  getRoute(): string{
-    return this.destRoute
+  next(logged: boolean){
+    this.logged.next(logged);
   }
+  
 }

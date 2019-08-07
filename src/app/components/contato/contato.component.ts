@@ -2,11 +2,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ContatosService } from './../../services/contatos.service';
 import { Contato } from './../../models/Contato';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsLocaleService } from 'ngx-bootstrap';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DateValidator } from 'src/app/shared/validators/DateValidator';
-import { unescapeIdentifier } from '@angular/compiler';
 
 @Component({
   selector: 'app-contato',
@@ -16,6 +14,7 @@ import { unescapeIdentifier } from '@angular/compiler';
 export class ContatoComponent implements OnInit {
 
   formGroup: FormGroup;
+  phoneGroup: FormGroup;
   btnDisabled = false;
   id:string = undefined;
 
@@ -35,22 +34,24 @@ export class ContatoComponent implements OnInit {
     }
   }
 
-  updateForm(contato: Contato){
-    console.log(contato);
-    this.formGroup.patchValue(contato);
-  }
-
   constroiForm(){
+    this.phoneGroup = this.fb.group({
+      celular: ['', Validators.required],
+      residencial: ['']
+    })
+
     this.formGroup = this.fb.group({
       name: ['', Validators.required],
       id: [''],
       lastName: ['', Validators.required],
       email: ['', { validators: [Validators.required, Validators.email], updateOn: 'blur'}],
-      birthDate: ['', { validators: [Validators.required, DateValidator], updateOn: 'blur'}]
+      birthDate: ['', { validators: [Validators.required, DateValidator], updateOn: 'blur'}],
+      enderecos: this.fb.array([]),
+      phoneGroup: this.phoneGroup
     })
   }
 
-  send(e: Event){
+  send(e: Event) : void{
     e.preventDefault(); 
     this.btnDisabled = true;
 
@@ -58,14 +59,27 @@ export class ContatoComponent implements OnInit {
     .subscribe(() => this.formSuccess(), (error) => this.formSendError(error));
   }
 
-  formSuccess(){
+  updateForm(contato: Contato) : void{
+    this.phoneGroup.patchValue({
+      celular: contato.phones[0],
+      residencial: contato.phones[1]
+    });
+    
+    this.formGroup.patchValue(contato);
+  }
+
+  addEnderecoForm(fg: FormGroup): void{
+    const enderecosArray = this.formGroup.get('enderecos') as FormArray;
+    enderecosArray.push(fg);
+  }
+
+  private formSuccess(){
     this.toastService.success("Contato criado com sucesso");
     this.formGroup.reset();
     this.btnDisabled = false
   }
 
-  formSendError(error){
-    console.error(error);
+  private formSendError(error){
     this.toastService.error("Ocorreu um erro ao criar o contato");
     this.btnDisabled = false
 

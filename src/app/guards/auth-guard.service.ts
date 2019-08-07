@@ -1,3 +1,4 @@
+import { AppSettings } from './../shared/AppSettings';
 import { LoginService } from '../services/login.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
@@ -8,10 +9,8 @@ export class AuthGuardService implements CanActivate {
 
   constructor(private auth: LoginService, private router: Router) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const ok = !!this.auth.token;
-    if (!ok) {
-      this.auth.setRoute(state.url);
-      this.router.navigateByUrl('/login');
+    if (!localStorage.getItem(AppSettings.API_KEY)) {
+      this.router.navigate(["/login", {queryParams: {redirect: state.url}}]);
       return false;
     }
     return true;

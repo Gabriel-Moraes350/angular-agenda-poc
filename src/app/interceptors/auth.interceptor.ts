@@ -1,3 +1,4 @@
+import { AppSettings } from './../shared/AppSettings';
 import { LoginService } from './../services/login.service';
 import { Injectable, Injector } from '@angular/core';
 import {Observable, throwError} from 'rxjs';
@@ -22,11 +23,10 @@ export class AuthInterceptor implements HttpInterceptor
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>
     {
         if(req.url.indexOf("/login") !== -1){
-            console.log('entrou aqui');
             return next.handle(req);
         }
         
-        let token =  this.loginService.token;
+        const token =  localStorage.getItem(AppSettings.API_KEY);
         if(token){
             req = req.clone({
                 headers: req.headers.set('Authorization', token)

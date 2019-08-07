@@ -1,0 +1,65 @@
+<div [formGroup]="enderecoGroup" class="row">
+    <input-text class="col-10" [label]="'Rua'">
+        <input formControlName="rua" inputRef class="form-control" type="text" />
+    </input-text>
+
+    <input-text class="col-2" [label]="'Número'">
+        <input formControlName="numero" inputRef class="form-control" type="text" />
+    </input-text>
+
+    <input-text class="col-6" [label]="'CEP'">
+        <input formControlName="cep" inputRef mask="00000-000" class="form-control" type="text" />
+    </input-text>
+
+    <input-text class="col-6" [label]="'Bairro'">
+        <input formControlName="bairro" inputRef class="form-control" type="text" />
+    </input-text>
+
+    <input-text class="col-6" [label]="'Complemento'">
+        <input formControlName="complemento" inputRef class="form-control" type="text" />
+    </input-text>
+
+    <input-text class="col-6" [label]="'Cidade'">
+        <input formControlName="cidade" inputRef class="form-control" type="text" />
+    </input-text>
+
+    <input-text class="col-6" [label]="'Estado'">
+        <select inputRef formControlName="uf" class="form-control">
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+        </select>
+    </input-text>
+
+    <input-text class="col-6" [label]="'Tipo Endereço'">
+        <select inputRef formControlName="tipoEndereco" class="form-control">
+            <option value="RES">Residencial</option>
+            <option value="EMP">Empresarial</option>
+            </select>
+    </input-text>
+
+</div>

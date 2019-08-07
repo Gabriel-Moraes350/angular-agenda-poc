@@ -16,6 +16,32 @@
             formControlName="birthDate">
     </input-text>
 
+    <div class="row col-12" [formGroup]="phoneGroup">
+        <h4 class="col-12">Telefones</h4>
+        <input-text class="col-6" [label]="'Celular'">
+            <input type="text" mask="(00)00000-0000" inputRef placeholder="(15)99999-9999" class="form-control"
+            formControlName="celular">
+        </input-text>
+        <input-text class="col-6" [label]="'Residencial'">
+            <input type="text" mask="(00)00000-0000" inputRef placeholder="(15)9999-9999" class="form-control"
+            formControlName="residencial">
+        </input-text>
+    </div>
+
+    <div class="row col-12">
+        <h4 class="col-12">Endereços</h4>
+        <accordion [isAnimated]="true" class="col-12">
+            <accordion-group (click)="$event.preventDefault()" heading="Endereço residencial">
+                <app-endereco class="col-12" (formReady)="addEnderecoForm($event)" [tipo]="'RES'"></app-endereco>
+            </accordion-group>
+        </accordion>
+
+        <accordion [isAnimated]="true" class="col-12">
+            <accordion-group heading="Endereço Empresarial">
+                <app-endereco class="col-12" (formReady)="addEnderecoForm($event)" [tipo]="'EMP'"></app-endereco>
+            </accordion-group>
+        </accordion>
+    </div>
     <div class="col-12">
         <button type="submit" [disabled]="!form.valid || btnDisabled" class="btn btn-primary">Enviar!</button>
     </div>

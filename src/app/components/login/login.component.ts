@@ -13,14 +13,16 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   loginForm : FormGroup
-
+  redirectRoute: string
   constructor(private fb: FormBuilder,
               private service: LoginService,
               private toast: ToastService,
-              private route: Router) { }
+              private route: Router,
+              private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.constroiForm()
+    this.redirectRoute = this.activeRoute.snapshot.paramMap.get('redirect')
   }
 
   constroiForm(){
@@ -43,7 +45,7 @@ export class LoginComponent implements OnInit {
       
       //redireciona
       this.toast.success("Login realizado com sucesso",
-      () => this.route.navigateByUrl(`/${this.service.getRoute()}`));
+      () => this.route.navigateByUrl(`/${this.redirectRoute}`));
     }, err => {
       this.toast.error("Senha ou Usuário inválidos! Tente novamente!");
     });

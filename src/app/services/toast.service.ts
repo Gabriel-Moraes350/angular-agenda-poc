@@ -29,7 +29,7 @@ export class ToastService {
       setTimeout(() => {
         this.clear()
         callback()
-      }, 200);
+      }, 2000);
     }
   }
 

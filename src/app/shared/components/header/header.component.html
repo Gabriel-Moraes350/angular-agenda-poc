@@ -56,8 +56,8 @@
                             </a>
                            
                             <div  *dropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a *ngIf="!isLogged" class="dropdown-item" href="#" routerLink="/login">Login</a>
-                                <a *ngIf="isLogged" class="dropdown-item" href="#" routerLink="/logout">Logout</a>
+                                <a *ngIf="(service.isLogged() | async) === false" class="dropdown-item" href="#" routerLink="/login">Login</a>
+                                <a *ngIf="(service.isLogged() | async) === true" class="dropdown-item" href="#" routerLink="/logout">Logout</a>
                             </div>
                         </div>
                     </li>
